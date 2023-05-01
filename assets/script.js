@@ -18,20 +18,21 @@ const slides = [
 ]
 
 const buttonLeft = document.querySelector(".arrow_left");
-buttonLeft.addEventListener("click", clickLeft);
+buttonLeft.addEventListener("click", function() {click('left')});
 
 const buttonRight = document.querySelector(".arrow_right");
-buttonRight.addEventListener("click", clickRight);
+buttonRight.addEventListener("click", function() {click('right')});
 
 const bannerImage = document.querySelector(".banner-img");
 
 const idBannerText = document.getElementById("banner");
-const bannerText = idBannerText.getElementsByTagName("p")[0];
+const bannerText = idBannerText.getElementsByTagName("p")[0]; //liste dans laquelle on trouve <p>
 
 const classDots = document.querySelector(".dots");
 
-let arrayDots = [];
+const arrayDots = [];  //tableau dans lequel vont s'incrémenter les dots
 
+//insertion des classes 'dot' dans le HTML
 for (let i = 0; i < slides.length; i++) {
 	const divDot = document.createElement('div');
 	divDot.classList.add("dot");
@@ -39,26 +40,24 @@ for (let i = 0; i < slides.length; i++) {
 	arrayDots.push(divDot); // ajouter dans le tableau
 	classDots.appendChild(divDot) // ajouter dans le HTML
 }
-arrayDots[0].classList.add("dot_selected");
+arrayDots[0].classList.add("dot_selected"); //ajout de'dot_selected' à la positon 0 du tableau
 
 let position = 0;
 
 
 function setBannerPosition(position)
 {
-	let imagePath = "assets/images/slideshow/" + slides[position].image;
-	bannerImage.setAttribute("src", imagePath);	
+	const imagePath = "assets/images/slideshow/" + slides[position].image;
+	bannerImage.setAttribute("src", imagePath);	//récupération et ajout des images
 
-	let imageText = slides[position].tagLine;
-	bannerText.innerHTML = imageText;
+	const imageText = slides[position].tagLine;
+	bannerText.innerHTML = imageText; //récupération et ajout du texte
 
-	arrayDots[position].classList.add("dot_selected");
+	arrayDots[position].classList.add("dot_selected"); //ajout du 'dot_selected' sur la position
 }
 
 function clickRight ()
 {
-	arrayDots[position].classList.remove("dot_selected");
-	
 	if(position < slides.length-1)
 	{
 		position++;
@@ -67,13 +66,10 @@ function clickRight ()
 	{
 		position = 0;
 	}
-
-	setBannerPosition(position);
 }
 
 function clickLeft ()
 {
-	arrayDots[position].classList.remove("dot_selected");
 	if(position > 0)
 	{
 		position--;
@@ -82,8 +78,22 @@ function clickLeft ()
 	{
 		position = slides.length-1;
 	}
-
-	setBannerPosition(position);
 	
 }
+
+function click (direction) 
+{
+	arrayDots[position].classList.remove("dot_selected");
+	
+	if (direction === "right")
+	{
+		clickRight();
+	}
+	if (direction ==="left")
+	{
+		clickLeft();
+	}
+	setBannerPosition(position);
+}
+
 
