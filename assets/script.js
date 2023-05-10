@@ -18,47 +18,47 @@ const slides = [
 ]
 
 const buttonLeft = document.querySelector(".arrow_left");
-buttonLeft.addEventListener("click", function() {click('left')});
+buttonLeft.addEventListener("click", function() {click("left")});
 
 const buttonRight = document.querySelector(".arrow_right");
-buttonRight.addEventListener("click", function() {click('right')});
+buttonRight.addEventListener("click", function() {click("right")});
 
 const bannerImage = document.querySelector(".banner-img");
 
 const idBannerText = document.getElementById("banner");
-const bannerText = idBannerText.getElementsByTagName("p")[0]; //liste dans laquelle on trouve <p>
+const bannerText = idBannerText.getElementsByTagName("p")[0]; //list in which we find <p>
 
 const classDots = document.querySelector(".dots");
 
-const arrayDots = [];  //tableau dans lequel vont s'incrémenter les dots
+const arrayDots = [];  //array in which the dots will be incremented
 
-//insertion des classes 'dot' dans le HTML
-for (let i = 0; i < slides.length; i++) {
-	const divDot = document.createElement('div');
+//inserting "dot" classes in HTML
+for (let i = 0; i <slides.length; i++) {
+	const divDot = document.createElement("div");
 	divDot.classList.add("dot");
 
-	arrayDots.push(divDot); // ajouter dans le tableau
-	classDots.appendChild(divDot) // ajouter dans le HTML
+	arrayDots.push(divDot); //add in the array
+	classDots.appendChild(divDot) //add in the HTML
 }
-arrayDots[0].classList.add("dot_selected"); //ajout de'dot_selected' à la positon 0 du tableau
+arrayDots[0].classList.add("dot_selected"); //add the "dot_selected" at position 0 of the array
 
 let position = 0;
 
-
+/*recovering and adding images, recovering and adding text, adding "dot_selected" on position */
 function setBannerPosition(position)
 {
 	const imagePath = "assets/images/slideshow/" + slides[position].image;
-	bannerImage.setAttribute("src", imagePath);	//récupération et ajout des images
+	bannerImage.setAttribute("src", imagePath);
 
 	const imageText = slides[position].tagLine;
-	bannerText.innerHTML = imageText; //récupération et ajout du texte
+	bannerText.innerHTML = imageText;
 
-	arrayDots[position].classList.add("dot_selected"); //ajout du 'dot_selected' sur la position
+	arrayDots[position].classList.add("dot_selected"); 
 }
 
 function clickRight ()
 {
-	if(position < slides.length-1)
+	if(position <slides.length-1)
 	{
 		position++;
 	}
